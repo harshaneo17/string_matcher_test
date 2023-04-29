@@ -11,8 +11,8 @@ class StringMatcher():
         #takes arguements as file path
         parser = ArgumentParser(add_help=False)
         args = parser.add_argument_group('Options')
-        args.add_argument('-h','--help',action='help',help = 'Show this help message and exit')
-        args.add_argument('file',help = 'Reqruired. Path to an .txt file')
+        args.add_argument('-h','--help',action='help',help = 'This is a help message')
+        args.add_argument('file',help = 'Required. Path to an .txt file or csv file')
         return parser
     def run(self):
         args = self.build_argparser().parse_args()
@@ -22,11 +22,16 @@ class StringMatcher():
             with open(string_case, "r") as file:
                 lines = file.readlines()
                 last_line = lines[-1]
-                print('yes')
+                lines = list(lines)[:-1]
+                for line in lines:
+                    if re.search(last_line,str(line)):
+                        print(line)
+                    else:
+                        print(None)
         elif args.file.endswith('.csv'):
             log.info('opening a csv file')
             with open(string_case, "r") as file:
-                lines = file.readlines()
+                lines = file.read().strip()
                 last_line = lines[-1]
                 print('easy')
         else:
