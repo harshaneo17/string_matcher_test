@@ -5,6 +5,7 @@ This program lets user pass a textfile path as a arguement to the script.
 The script then looks for the search term in the last line of the file and looks for that search item in the other lines of the file.
 
 **USER HELP** - Use the help function by running -h as an arguement to the program
+
 **DEVELOPER HELP** - Please refer to comments and doc strings in the di_testcode.py file
 
 The file should be a txt file
