@@ -8,7 +8,7 @@ from argparse import ArgumentParser, SUPPRESS
 from pathlib import Path
 import re
 
-log.basicConfig(level=log.INFO)
+log.basicConfig(level=log.INFO) #sets the basic logging level as info in that way any warnings or info statements are shown
 
 class StringMatcher():
     def build_argparser(self) -> object:
@@ -17,7 +17,7 @@ class StringMatcher():
         argparse.ArgumentParser object: A configured argument parser object."""
         parser = ArgumentParser(add_help=False)
         args = parser.add_argument_group('Options')
-        args.add_argument('-h','--help',action='help',help = 'Please follow the readme.md file for instructions on how to run this program')
+        args.add_argument('-h','--help',action='help',help = 'Please follow the readme.md file for instructions on how to run this program') #adds a -h flag to help the user with the program
         args.add_argument('file',help = 'Required. Path to an .txt file')
         return parser
     
@@ -28,7 +28,7 @@ class StringMatcher():
         args = self.build_argparser().parse_args()
         self.file_path = args.file
         with open(self.file_path, "r") as file:
-            lines = file.readlines()
+            lines = file.readlines() #reads the files contents line by line and stores them in lines variable
             search_term = lines[-1].strip() #stores the last line as the search term
             return search_term,lines
              
@@ -38,9 +38,9 @@ class StringMatcher():
         Error message or None."""
         args = self.build_argparser().parse_args()
         self.file_path = args.file
-        if not Path(self.file_path).is_file():
+        if not Path(self.file_path).is_file(): #checks if it is a valid path 
             return f'{self.file_path} is not a valid file path'
-        if not args.file.endswith('.txt'):
+        if not args.file.endswith('.txt'): #checks if it is a .txt file
             return 'Please input a text file'
         return None
 

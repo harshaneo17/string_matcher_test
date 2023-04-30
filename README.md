@@ -23,3 +23,5 @@ This program runs on python3 not python2.7 as it no longer has support.
 File is a text file as this is a basic program that checks for text files.
 The contents of the files are relatively small without any empty lines in between. readlines() function takes time for a larger file size. The complexity of the problem can be reduced by not using .readlines()
 
+I didnt see the need for __init__ function in the class StringMatcher. If you think its necessary please send me an email. 
+
