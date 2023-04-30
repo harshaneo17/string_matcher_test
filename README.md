@@ -20,12 +20,16 @@ The file should be a txt file
 
     py test.py <<path of the file>> 
 
+If the program doesnt find any 
+
 
 Assumptions:
-The search term is always a alphabetical string. It never has any numbers in it.  As described in the problem statement it is a word
+The search term is always a alphabetical string. It never has any numbers in it.  As described in the problem statement it is a word. It takes special characters like german umlaut, greek alphabets
 This program runs on python3 not python2.7 as it no longer has support. 
 File is a text file as this is a basic program that checks for text files.
-The contents of the files are relatively small without any empty lines in between. readlines() function takes time for a larger file size. The complexity of the problem can be reduced by not using .readlines()
+There are no empty lines between the search term and source text. 
+The contents of the files are relatively small without any empty lines in between. readlines() function takes time for a larger file size. The complexity of the problem can be reduced by not using .readlines() as this current program cannot handle large files.
+Also what happens if there are no search terms in source files? Its just means the program can return a statement to the user saying "No search_term found in the source_text". The drawback being its going to do it everytime 
 
 I didnt see the need for __init__ function in the class StringMatcher. If you think its necessary please send me an email. 
 

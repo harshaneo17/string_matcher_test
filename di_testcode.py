@@ -7,8 +7,10 @@ import logging as log
 from argparse import ArgumentParser, SUPPRESS
 from pathlib import Path
 import re
+import os
 
 log.basicConfig(level=log.INFO) #sets the basic logging level as info in that way any warnings or info statements are shown
+
 
 class StringMatcher():
     def build_argparser(self) -> object:
@@ -25,7 +27,8 @@ class StringMatcher():
     def search_item(self) -> tuple:
         """stores the search item from the txt file.
         Returns:
-        A tuple of search item and lines in the file"""
+        A tuple of search item and lines in the file
+        note: This doesnt solve the problem for larger files"""
         args = self.build_argparser().parse_args()
         self.file_path = args.file
         with open(self.file_path, "r") as file:
@@ -40,9 +43,11 @@ class StringMatcher():
         args = self.build_argparser().parse_args()
         self.file_path = args.file
         if not Path(self.file_path).is_file(): #checks if it is a valid path 
-            return f'{self.file_path} is not a valid file path'
+            return f'{self.file_path} is not a valid file path. Make sure the file exists'
         if not args.file.endswith('.txt'): #checks if it is a .txt file
-            return 'Please input a text file'
+            return f'{self.file_path} is not text file.Please input a text file'
+        if os.stat(self.file_path).st_size == 0:
+            return f'{self.file_path} is empty. Please make sure it has contents'
         return None
 
     def perform_string_operation(self, last_line: str,lines_file: list) -> None:
@@ -51,11 +56,14 @@ class StringMatcher():
         print statement."""
         for line in lines_file[:-1]: #this for loop go through all the lines except the last line in the file
             if last_line in line: #sub string matching using python "in"
-                clean_line = re.sub(r'[^a-zA-Z\s]+', ' ', line) #more filters can be added here
+                clean_line = re.sub(r'[^A-Za-zÀ-ÖØ-öø-ÿ\s]+', ' ', line) #more filters can be added here
                 print(f'[{clean_line.strip()}]')
+            else:
+                log.warning("No search_term found in the source_text file")
         return None
 
     def run(self) -> None:
+        """Main block of the code."""
         error_message = self.check_file_health()
         if error_message:
             log.error(error_message)
