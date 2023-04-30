@@ -12,6 +12,7 @@ log.basicConfig(level=log.INFO) #sets the basic logging level as info in that wa
 
 class StringMatcher():
     def build_argparser(self) -> object:
+        #inspired from intel openvino code base
         """Build the command line argument parser for the program.
         Returns:
         argparse.ArgumentParser object: A configured argument parser object."""
@@ -48,8 +49,8 @@ class StringMatcher():
         """Performs string operation by matching last line with each line in the file and does some regex filtering to avoid numerical,special characters. 
         Returns
         print statement."""
-        for line in lines_file[:-1]:
-            if last_line in line:
+        for line in lines_file[:-1]: #this for loop go through all the lines except the last line in the file
+            if last_line in line: #sub string matching using python "in"
                 clean_line = re.sub(r'[^a-zA-Z\s]+', ' ', line) #more filters can be added here
                 print(f'[{clean_line.strip()}]')
         return None
