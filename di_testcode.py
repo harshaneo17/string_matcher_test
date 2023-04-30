@@ -1,44 +1,71 @@
 #test for deeper insights
 
+
 import logging as log
-import sys
 from argparse import ArgumentParser, SUPPRESS
 from pathlib import Path
 import re
 
+log.basicConfig(level=log.INFO)
+
 class StringMatcher():
     def build_argparser(self) -> object:
-        #takes arguements as file path
+        """Build the command line argument parser for the program.
+        Returns:
+        argparse.ArgumentParser object: A configured argument parser object."""
         parser = ArgumentParser(add_help=False)
         args = parser.add_argument_group('Options')
-        args.add_argument('-h','--help',action='help',help = 'This is a help message')
-        args.add_argument('file',help = 'Required. Path to an .txt file or csv file')
+        args.add_argument('-h','--help',action='help',help = 'Please follow the readme.md file for instructions on how to run this program')
+        args.add_argument('file',help = 'Required. Path to an .txt file')
         return parser
-    def run(self):
+    
+    def search_item(self) -> tuple:
+        """stores the search item from the txt file.
+        Returns:
+        A tuple of search item and lines in the file"""
         args = self.build_argparser().parse_args()
-        string_case = args.file
-        if args.file.endswith('.txt'):
-            log.info('opening a text file')
-            with open(string_case, "r") as file:
-                lines = file.readlines()
-                last_line = lines[-1]
-                lines = list(lines)[:-1]
-                for line in lines:
-                    if re.search(last_line,str(line)):
-                        print(line)
-                    else:
-                        print(None)
-        elif args.file.endswith('.csv'):
-            log.info('opening a csv file')
-            with open(string_case, "r") as file:
-                lines = file.read().strip()
-                last_line = lines[-1]
-                print('easy')
-        else:
-            log.error(f'Please input a text file or csv file')
+        self.file_path = args.file
+        with open(self.file_path, "r") as file:
+            lines = file.readlines()
+            search_term = lines[-1].strip() #stores the last line as the search term
+            return search_term,lines
+             
+    def check_file_health(self) -> None:
+        """Checks the file health based on existence and extension of file path. 
+        Returns:
+        Error message or None."""
+        args = self.build_argparser().parse_args()
+        self.file_path = args.file
+        if not Path(self.file_path).is_file():
+            return f'{self.file_path} is not a valid file path'
+        if not args.file.endswith('.txt'):
+            return 'Please input a text file'
+        return None
+
+    def perform_string_operation(self, last_line,lines_file) -> None:
+        """Performs string operation by matching last line with each line in the file and does some regex filtering to avoid numerical,special characters. 
+        Returns None."""
+        for line in lines_file[:-1]:
+            if last_line in line:
+                clean_line = re.sub(r'[^a-zA-Z\s]+', ' ', line)
+                print(f'[{clean_line.strip()}]')
+        return None
+
+    def run(self) -> None:
+        error_message = self.check_file_health()
+        if error_message:
+            log.error(error_message)
+            return
+
+        log.info('opening a text file')
+        last_line, lines_file = self.search_item()
+        with open(self.file_path, "r") as file:
+            self.perform_string_operation(last_line, lines_file)
+        return None
 
 
 def main():
+    """Creates an object of the type class StringMatcher and runs it"""
     stringapp = StringMatcher()
     stringapp.run()
 
