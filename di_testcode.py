@@ -45,7 +45,7 @@ class StringMatcher():
             return 'Please input a text file'
         return None
 
-    def perform_string_operation(self, last_line,lines_file) -> None:
+    def perform_string_operation(self, last_line: str,lines_file: list) -> None:
         """Performs string operation by matching last line with each line in the file and does some regex filtering to avoid numerical,special characters. 
         Returns
         print statement."""

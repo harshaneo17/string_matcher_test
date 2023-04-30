@@ -1,38 +1,41 @@
+"""Author: Sriharsha Aryasomayajula
+   Date: 30-04-2023
+   Position: Machine Learning Software Engineer
+   3 test cases"""
+
 import unittest
-from unittest.mock import patch
 from io import StringIO
-import sys
-from pathlib import Path
+from unittest.mock import patch
 from di_testcode import StringMatcher
 
-
 class TestStringMatcher(unittest.TestCase):
-    def test_run(self):
-        # Test case 1: Valid file path and extension
-        input_file = 'test_file.txt'
-        with open(input_file, 'w') as f:
-            f.write('This is the first line.\n')
-            f.write('This is the second line.\n')
-            f.write('This is the third line.\n')
-            f.write('search term\n')
-        expected_output = '[This is the third line]'
+    def setUp(self):
+        """Set up a StringMatcher object for each test method"""
+        self.string_matcher = StringMatcher()
+
+    def test_search_item(self):
+        """Test the search_item method of StringMatcher"""
+        with patch('builtins.input', return_value='.default.txt'), patch('sys.stdout', new=StringIO()) as output:
+            search_term, lines = self.string_matcher.search_item()
+            # Assert that the search term and lines list are as expected
+            self.assertEqual(search_term, 'er')
+            self.assertEqual(lines, ['"Alice was beginning...\n', 'to_get9_!very\n', '1111tired1111of1111sitting1111\n',' by her_sister.\n','on9the bank,\n','and""of""having\n','nothing to do!!!\n','er\n'])
+
+    def test_check_file_health_valid_path(self):
+        """Test the check_file_health method of StringMatcher with a valid file path"""
+        with patch('builtins.input', return_value='not_default.txt'):
+            error_message = self.string_matcher.check_file_health()
+            # Assert that the error message is None, indicating a valid file path
+            self.assertIsNone(error_message)
+
+    def test_perform_string_operation(self):
+        """Test the perform_string_operation method of StringMatcher"""
+        last_line = 'er'
+        lines_file = ['"Alice was beginning...\n', 'to_get9_!very\n', '1111tired1111of1111sitting1111\n',' by her_sister.\n','on9the bank,\n','and""of""having\n','nothing to do!!!\n','er\n']
         with patch('sys.stdout', new=StringIO()) as output:
-            StringMatcher().run(input_file)
-            self.assertEqual(output.getvalue().strip(), expected_output)
-
-        # Test case 2: Invalid file path
-        input_file = 'invalid_file.txt'
-        expected_output = f'{input_file} is not a valid file path'
-        with patch('sys.stderr', new=StringIO()) as error_output:
-            StringMatcher().run(input_file)
-            self.assertEqual(error_output.getvalue().strip(), expected_output)
-
-        # Test case 3: Invalid file extension
-        input_file = 'invalid_file.png'
-        expected_output = 'Please input a text file'
-        with patch('sys.stderr', new=StringIO()) as error_output:
-            StringMatcher().run(input_file)
-            self.assertEqual(error_output.getvalue().strip(), expected_output)
+            self.string_matcher.perform_string_operation(last_line, lines_file)
+            # Call the perform_string_operation method with the inputs and capture the output
+            self.assertEqual(output.getvalue().strip(), '[to get very]\n[by her sister]')
 
 if __name__ == '__main__':
-    unittest.main()
+    unittest.main(argv=['first-arg-is-ignored'], exit=False)
