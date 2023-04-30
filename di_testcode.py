@@ -1,5 +1,7 @@
 #test for deeper insights
-
+"""Author: Sriharsha Aryasomayajula
+   Date: 30-04-2023
+   Position: Machine Learning Software Engineer"""
 
 import logging as log
 from argparse import ArgumentParser, SUPPRESS
@@ -44,10 +46,11 @@ class StringMatcher():
 
     def perform_string_operation(self, last_line,lines_file) -> None:
         """Performs string operation by matching last line with each line in the file and does some regex filtering to avoid numerical,special characters. 
-        Returns None."""
+        Returns
+        print statement."""
         for line in lines_file[:-1]:
             if last_line in line:
-                clean_line = re.sub(r'[^a-zA-Z\s]+', ' ', line)
+                clean_line = re.sub(r'[^a-zA-Z\s]+', ' ', line) #more filters can be added here
                 print(f'[{clean_line.strip()}]')
         return None
 
