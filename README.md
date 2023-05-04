@@ -20,9 +20,6 @@ The file should be a txt file
 
     py test.py <<path of the file>> 
 
-
-
-
 Assumptions:
 The search term is always a alphabetical string. It never has any numbers in it.  As described in the problem statement it is a word. It takes special characters like german umlaut, greek alphabets (I have checked with Clare Walsh and she confirmed this)
 
