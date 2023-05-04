@@ -18,6 +18,8 @@ The file should be a txt file
 
 **TEST CASE USAGE**
 
+In order to use the test case set the debug parameter in config.yaml to True and add the path directly in the path parameter of config.yaml
+
     py test.py <<path of the file>> 
 
 Assumptions:

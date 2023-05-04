@@ -6,10 +6,18 @@
 import logging as log
 from argparse import ArgumentParser, SUPPRESS
 from pathlib import Path
+from ruamel.yaml import YAML
 import re
 import os
 
 log.basicConfig(level=log.INFO) #sets the basic logging level as info in that way any warnings or info statements are shown
+
+with open("config.yaml") as f:  #this opens the config.yaml
+    yaml = YAML(typ='safe')
+    params = yaml.load(f) #this sets the params file
+    
+debug = params['test'] #if this is set to true then no need to pass arguments to di_testcode.py
+test_path = params['path'] #this is to ensure needless parameters are passed while using test cases
 
 def build_argparser() -> object:
     #inspired from intel openvino code base
@@ -22,13 +30,18 @@ def build_argparser() -> object:
     args.add_argument('file',help = 'Required. Path to an .txt file')
     return parser
 
+
 #if and else statement with yaml config to describe what the status is
 #package this into a pip cli package
 
 class StringMatcher():
+    """A simple switch case to decide what to use as file path depending on the configuration from config.yaml"""
     def __init__(self) -> None:
-        self.args = build_argparser().parse_args()
-        self.file_path = self.args.file
+        if debug == False:
+            self.args = build_argparser().parse_args()
+            self.file_path = self.args.file
+        else:
+            self.file_path = test_path
 
     def search_item(self) -> tuple:
         """stores the search item from the txt file.
@@ -48,7 +61,7 @@ class StringMatcher():
         Error message or None."""
         if not Path(self.file_path).is_file(): #checks if it is a valid path 
             return f'{self.file_path} is not a valid file path. Make sure the file exists'
-        if not self.args.file.endswith('.txt'): #checks if it is a .txt file
+        if not self.file_path.endswith('.txt'): #checks if it is a .txt file
             return f'{self.file_path} is not text file.Please input a text file'
         if os.stat(self.file_path).st_size == 0:
             return f'{self.file_path} is empty. Please make sure it has contents'
