@@ -4,8 +4,6 @@
    3 test cases"""
 
 import unittest
-from io import StringIO
-from unittest.mock import patch
 from solution_harsha.di_testcode import StringMatcher
 
 
