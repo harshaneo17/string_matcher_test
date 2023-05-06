@@ -14,9 +14,6 @@ import pkg_resources
 
 log.basicConfig(level=log.INFO) #sets the basic logging level as info in that way any warnings or info statements are shown
 
-# os.chdir('../')
-
-# print(os.getcwd()) #future code to make the config path relative to the users working directry
 
 with pkg_resources.resource_stream(__name__, 'config.yaml') as f:  #this opens the config.yaml
     yaml = YAML(typ='safe')
@@ -36,9 +33,6 @@ def build_argparser() -> object:
     args.add_argument('file',help = 'Required. Path to an .txt file')
     return parser
 
-
-#if and else statement with yaml config to describe what the status is
-#package this into a pip cli package
 
 class StringMatcher():
     """A simple switch case to decide what to use as file path depending on the configuration from config.yaml"""
@@ -92,7 +86,7 @@ class StringMatcher():
             log.error(error_message)
             return
 
-        log.debug('opening a text file')
+        log.debug('opening a text file') #debug statement 
         last_line, lines_file = self.search_item()
         with open(self.file_path, "r") as file:
             if not len(self.perform_string_operation(last_line, lines_file)): #this checks if the length of counter is 0 then its prints the error

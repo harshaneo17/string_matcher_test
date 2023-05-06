@@ -36,10 +36,6 @@ def build_argparser() -> object:
     args.add_argument('file',help = 'Required. Path to an .txt file')
     return parser
 
-
-#if and else statement with yaml config to describe what the status is
-#package this into a pip cli package
-
 class StringMatcher():
     """A simple switch case to decide what to use as file path depending on the configuration from config.yaml"""
     def __init__(self) -> None:
