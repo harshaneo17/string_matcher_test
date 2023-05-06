@@ -24,7 +24,7 @@ In order to use the test case set the debug parameter in config.yaml to True and
 
     python test.py  
 
-> Please keep in mind to change the test parameter to False while actually running the app. Its only meant to be True when you are running test cases.
+> Please keep in mind to change the test parameter in the config.yaml to False while actually running the app. Its only meant to be True when you are running test cases.
 
 **The whole solution was packaged. Although Clare Walsh suggested i leave as it is. I wanted to package the solution. These are the steps I followed to package it into solution.** 
 
