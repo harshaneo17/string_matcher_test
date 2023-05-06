@@ -50,7 +50,8 @@ The whole solution was packaged. Although Clare Walsh suggested i leave as it is
 
     **for some bizzare reason I don't know why this prints the result twice**
 
-> I have confirmed with the Clare Walsh and she said it is okay if the for the solution to be executed manually using python script. I didnt fix the issue of the solution printing the result twice. But if you run the code directly without the package command line then it works normally. Please keep in mind to change the test parameter to False while actually running the app. Its only meant to be True when you are running test cases. 
+> I have confirmed with the Clare Walsh and she said it is okay if the solution to be executed manually using python script
+Example :- python solution.py <file_path> . I didn't fix the issue of the solution printing the result twice. But if you run the code directly without the package command line then it works normally. Please keep in mind to change the test parameter to False while actually running the app. Its only meant to be True when you are running test cases. 
 
 Assumptions:
 
