@@ -24,7 +24,9 @@ In order to use the test case set the debug parameter in config.yaml to True and
 
     python test.py  
 
-The whole solution was packaged. Although Clare Walsh suggested i leave as it is. I wanted to package the solution. These are the steps I followed to package it into solution. 
+> Please keep in mind to change the test parameter to False while actually running the app. Its only meant to be True when you are running test cases.
+
+**The whole solution was packaged. Although Clare Walsh suggested i leave as it is. I wanted to package the solution. These are the steps I followed to package it into solution.** 
 
 1. create a setup.py with all the requirements in the first directory.
 2. added all dependencies to requirements.txt
@@ -48,16 +50,17 @@ The whole solution was packaged. Although Clare Walsh suggested i leave as it is
 
         stringapp_di <<path_of_the_file>>
 
-    **for some bizzare reason I don't know why this prints the result twice**
+    **for some reason I don't know why this prints the result twice**
 
-> I have confirmed with the Clare Walsh and she said it is okay if the solution to be executed manually using python script
-Example :- python solution.py <file_path> . I didn't fix the issue of the solution printing the result twice. But if you run the code directly without the package command line then it works normally. Please keep in mind to change the test parameter to False while actually running the app. Its only meant to be True when you are running test cases. 
+> I didn't fix the issue of the solution printing the result twice when run from installed package.When run using the script manually it wokrs just fine. I have confirmed with the Clare Walsh and she said it is okay if the solution to be executed manually using python script
+Example :- python solution.py <file_path>. If you run the code directly without the package command line then it works normally.  
 
 Assumptions:
+---------------
 
-The user has python 3 and uses linux or windows OS. (I have checked with Clare Walsh and she confirmed this)
+The user has python 3 and uses linux or windows OS. (I have checked with Clare Walsh and she confirmed this that I can assume the user environment)
 
-The search term is always a alphabetical string. It never has any numbers in it.  As described in the problem statement it is a word. It takes special characters like german umlaut, greek alphabets (I have checked with Clare Walsh and she confirmed this)
+The search term is always a alphabetical string. It never has any numbers in it.  As described in the problem statement it is a word. It takes special characters like german umlaut, greek alphabets, and romance language letters
 
 Or the search_term can be dirty and it shall need cleaning before using it as search term. ( I have checked with Clare Walsh and she confirmed this)
 
