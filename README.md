@@ -50,19 +50,23 @@ The whole solution was packaged. Although Clare Walsh suggested i leave as it is
 
     **for some bizzare reason I don't know why this prints the result twice**
 
-> Since I have confirmed with the Clare Walsh I didnt fix the issue of the solution printing the result twice. But if you run the code directly wihtout the package command line then it works normally. Please keep in mind to change the test parameter to False while actually running the app. Its only meant to be True when you are running test cases. 
+> I have confirmed with the Clare Walsh and she said it is okay if the for the solution to be executed manually using python script. I didnt fix the issue of the solution printing the result twice. But if you run the code directly without the package command line then it works normally. Please keep in mind to change the test parameter to False while actually running the app. Its only meant to be True when you are running test cases. 
 
 Assumptions:
 
+The user has python 3 and uses linux or windows OS. (I have checked with Clare Walsh and she confirmed this)
+
 The search term is always a alphabetical string. It never has any numbers in it.  As described in the problem statement it is a word. It takes special characters like german umlaut, greek alphabets (I have checked with Clare Walsh and she confirmed this)
 
-Or the search_term can be dirty and it would shall need cleaning before using it as search term. ( I have checked with Clare Walsh and she confirmed this)
+Or the search_term can be dirty and it shall need cleaning before using it as search term. ( I have checked with Clare Walsh and she confirmed this)
 
 This program runs on python3 not python2.7 as it no longer has support. 
 
 File is a text file as this is a basic program that checks for text files. (I have checked with Clare Walsh and she confirmed this)
 
 There are no empty lines between the search term and source text. 
+
+Files will fit into memory. (I have checked with Clare Walsh and she confirmed this)
 
 Also what happens if there are no search terms in source files? Its just means the program can return a statement to the user saying "No search_term found in the source_text". The drawback being its going to do it everytime 
 
