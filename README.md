@@ -2,7 +2,9 @@
 deeper insights test code
 
 This program lets user pass a textfile path as a arguement to the script.
-The script then looks for the search term in the last line of the file and looks for that search item in the other lines of the file.
+The script then looks for the search term in the last line of the file and looks for that search item in the other lines of the file. 
+
+Clone this repo first 
 
 **USER HELP** - Use the help function by running -h as an arguement to the program
 
@@ -28,29 +30,30 @@ The whole solution was packaged. Although Clare Walsh suggested i leave as it is
 2. added all dependencies to requirements.txt
 3. build the package using 
 
-    python setup.py sdist bdist_wheel
+        python setup.py sdist bdist_wheel
 
 4. uploaded the build distribution to Pypi using
 
-    twine upload dist/*
+        twine upload dist/*
 
 5. This is available on https://pypi.org/project/solution-harsha/0.5/ To install this use this command
 
-    pip install solution-harsha
+        pip install solution-harsha
 
 6. To install this package run this command 
 
-    pip install solution_harsha
+        pip install solution_harsha
 
 7. After installing run this command with path to the text file and get result. 
 
-    stringapp_di <<path_of_the_file>>
+        stringapp_di <<path_of_the_file>>
 
     **for some bizzare reason I don't know why this prints the result twice**
 
-Since I have confirmed with the Clare Walsh I didnt fix the issue of the solution printing the result twice. But if you run the code directly wihtout the package command line then it works normally. Please keep in mind to change the test parameter to False while actually running the app. Its only meant to be True when you are running test cases. 
+> Since I have confirmed with the Clare Walsh I didnt fix the issue of the solution printing the result twice. But if you run the code directly wihtout the package command line then it works normally. Please keep in mind to change the test parameter to False while actually running the app. Its only meant to be True when you are running test cases. 
 
 Assumptions:
+
 The search term is always a alphabetical string. It never has any numbers in it.  As described in the problem statement it is a word. It takes special characters like german umlaut, greek alphabets (I have checked with Clare Walsh and she confirmed this)
 
 Or the search_term can be dirty and it would shall need cleaning before using it as search term. ( I have checked with Clare Walsh and she confirmed this)
@@ -63,4 +66,5 @@ There are no empty lines between the search term and source text.
 
 Also what happens if there are no search terms in source files? Its just means the program can return a statement to the user saying "No search_term found in the source_text". The drawback being its going to do it everytime 
 
+Originally I wanted to write this is a docker file. But i wasnt sure if this application would be used in cloud or user has docker installed. I confirmed with Clare Walsh that I can put it in readme saying assume user has docker. But i ultimately decided not to do docker container for this pplication and instead made a pip package. Although the package has a bug, I am more than willing to learn from people on solving the issue. 
 
