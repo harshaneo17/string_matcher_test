@@ -14,13 +14,41 @@ The file should be a txt file
     
     pip install -r requirements.txt
 
-    py di_testcode.py <<path of the file>>
+    python di_testcode.py <<path of the file>>
 
 **TEST CASE USAGE**
 
 In order to use the test case set the debug parameter in config.yaml to True and add the path directly in the path parameter of config.yaml
 
-    py test.py <<path of the file>> 
+    python test.py  
+
+The whole solution was packaged. Although Clare Walsh suggested i leave as it is. I wanted to package the solution. These are the steps I followed to package it into solution. 
+
+1. create a setup.py with all the requirements in the first directory.
+2. added all dependencies to requirements.txt
+3. build the package using 
+
+    python setup.py sdist bdist_wheel
+
+4. uploaded the build distribution to Pypi using
+
+    twine upload dist/*
+
+5. This is available on https://pypi.org/project/solution-harsha/0.5/ To install this use this command
+
+    pip install solution-harsha
+
+6. To install this package run this command 
+
+    pip install solution_harsha
+
+7. After installing run this command with path to the text file and get result. 
+
+    stringapp_di <<path_of_the_file>>
+
+    **for some bizzare reason I don't know why this prints the result twice**
+
+Since I have confirmed with the Clare Walsh I didnt fix the issue of the solution printing the result twice. But if you run the code directly wihtout the package command line then it works normally. Please keep in mind to change the test parameter to False while actually running the app. Its only meant to be True when you are running test cases. 
 
 Assumptions:
 The search term is always a alphabetical string. It never has any numbers in it.  As described in the problem statement it is a word. It takes special characters like german umlaut, greek alphabets (I have checked with Clare Walsh and she confirmed this)

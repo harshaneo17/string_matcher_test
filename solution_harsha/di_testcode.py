@@ -9,15 +9,21 @@ from pathlib import Path
 from ruamel.yaml import YAML
 import re
 import os
+import pkg_resources
+
 
 log.basicConfig(level=log.INFO) #sets the basic logging level as info in that way any warnings or info statements are shown
 
-with open("config.yaml") as f:  #this opens the config.yaml
+# os.chdir('../')
+
+# print(os.getcwd()) #future code to make the config path relative to the users working directry
+
+with pkg_resources.resource_stream(__name__, 'config.yaml') as f:  #this opens the config.yaml
     yaml = YAML(typ='safe')
     params = yaml.load(f) #this sets the params file
     
 debug = params['test'] #if this is set to true then no need to pass arguments to di_testcode.py
-test_path = params['path'] #this is to ensure needless parameters are passed while using test cases
+test_path = params['path'] #this is to ensure needless parameters are not passed as arguements while using test cases
 
 def build_argparser() -> object:
     #inspired from intel openvino code base
@@ -67,27 +73,30 @@ class StringMatcher():
             return f'{self.file_path} is empty. Please make sure it has contents'
         return None
 
-    def perform_string_operation(self, last_line: str,lines_file: list) -> None:
+    def perform_string_operation(self, last_line: str,lines_file: list) -> list:
         """Performs string operation by matching last line with each line in the file and does some regex filtering to avoid numerical,special characters. 
         Returns
         print statement."""
+        filter_list = []
         for line in lines_file[:-1]: #this for loop go through all the lines except the last line in the file
             if last_line in line: #sub string matching using python "in"
-                clean_line = re.sub(r'[^A-Za-zÀ-ÖØ-öø-ÿ\s]+', ' ', line) #more filters can be added here
-                print(f'[{clean_line.strip()}]')
-        return None
+                clean_line = re.sub(r'[^A-Za-zÀ-ÖØ-öø-ÿäüßàáâãäåæçèéêëìíîïñòóôõöøœùúûüý\s]+', ' ', line) #more filters can be added here
+                filter_list.append(clean_line)
+                print(f'[{clean_line.strip()}]') #output is printed here 
+        return filter_list
 
     def run(self) -> None:
-        """Main block of the code."""
+        """Main block of the code.checks the file healthcand returns executes the string_operation function"""
         error_message = self.check_file_health()
         if error_message:
             log.error(error_message)
             return
 
-        log.info('opening a text file')
+        log.debug('opening a text file')
         last_line, lines_file = self.search_item()
         with open(self.file_path, "r") as file:
-            self.perform_string_operation(last_line, lines_file)
+            if not len(self.perform_string_operation(last_line, lines_file)): #this checks if the length of counter is 0 then its prints the error
+                log.error(f'The search_term doesnt exist in the source_text for the file {self.file_path}')
         return None
 
 
