@@ -1,8 +1,3 @@
-"""Author: Sriharsha Aryasomayajula
-   Date: 30-04-2023
-   Position: Machine Learning Software Engineer
-   3 test cases"""
-
 import unittest
 from solution_harsha.di_testcode import StringMatcher
 

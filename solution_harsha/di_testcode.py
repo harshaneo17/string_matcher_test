@@ -14,10 +14,6 @@ import pkg_resources
 
 log.basicConfig(level=log.INFO) #sets the basic logging level as info in that way any warnings or info statements are shown
 
-# os.chdir('../')
-
-# print(os.getcwd()) #future code to make the config path relative to the users working directry
-
 with pkg_resources.resource_stream(__name__, 'config.yaml') as f:  #this opens the config.yaml
     yaml = YAML(typ='safe')
     params = yaml.load(f) #this sets the params file

@@ -1,8 +1,3 @@
-#test for deeper insights
-"""Author: Sriharsha Aryasomayajula
-   Date: 30-04-2023
-   Position: Machine Learning Software Engineer"""
-
 import logging as log
 from argparse import ArgumentParser, SUPPRESS
 from pathlib import Path
