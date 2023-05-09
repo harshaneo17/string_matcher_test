@@ -1,4 +1,3 @@
 regex
 argparse
 ruamel.yaml
-os
