@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='solution_harsha',
-    version='0.9',
+    version='0.10',
     description='A tool for performing string matching on text files',
     author='Sriharsha Aryasomayajula',
     author_email='harshaarya17@outlook.com',
