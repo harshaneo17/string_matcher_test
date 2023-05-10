@@ -48,5 +48,4 @@ In order to use the test case set the debug parameter in config.yaml to True and
 
         stringapp_di <<path_of_the_file>>
 
-> I didn't fix the issue of the solution printing the result twice when run from installed package.When run using the script manually it worKs just fine. 
-Example :- python solution.py <file_path>. If you run the code directly without the package command line then it works normally
+
