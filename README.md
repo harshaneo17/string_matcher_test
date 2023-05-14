@@ -12,6 +12,10 @@ Clone this repo first
 The file should be a txt file
 
 **USAGE**
+
+    python3 -m venv env
+
+    source env/bin/activate
     
     pip install -r requirements.txt
 
