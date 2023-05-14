@@ -43,6 +43,9 @@ class StringMatcher():
         note: This doesnt solve the problem for larger files"""
         with open(self.file_path, "r") as file:
             lines = []
+            # RS - I'm not sure if this is of much help when using large files as it's adding all the lines to the 'lines' array. 
+            # Would it be better to run the string operation on each file as it is and then discard that array completely?
+            # So something like: self.perform_string_operation(current_line, last_line) in this loop?
             for line in file: #a simple for loop to collect all the lines into a list. This goes easy on the memory for large files
                 lines.append(line)
             search_term = lines[-1].strip() #stores the last line as the search term
@@ -54,10 +57,13 @@ class StringMatcher():
         Error message or None."""
         if not Path(self.file_path).is_file(): #checks if it is a valid path 
             return f'{self.file_path} is not a valid file path. Make sure the file exists'
+        
         if not self.file_path.endswith('.txt'): #checks if it is a .txt file
             return f'{self.file_path} is not text file.Please input a text file'
+        
         if os.stat(self.file_path).st_size == 0:
             return f'{self.file_path} is empty. Please make sure it has contents'
+        
         return None
 
     def perform_string_operation(self, last_line: str,lines_file: list) -> list:
@@ -65,25 +71,34 @@ class StringMatcher():
         Returns
         print statement."""
         filter_list = []
-        for line in lines_file[:-1]: #this for loop go through all the lines except the last line in the file
-            if last_line in line: #sub string matching using python "in"
-                clean_line = re.sub(r'[^A-Za-zÀ-ÖØ-öø-ÿäüßàáâãäåæçèéêëìíîïñòóôõöøœùúûüý\s]+', ' ', line) #more filters can be added here
+        
+        # This for loop go through all the lines except the last line in the file
+        for line in lines_file[:-1]: 
+            # Sub string matching using python "in"
+            if last_line in line: 
+                # More filters can be added here
+                clean_line = re.sub(r'[^A-Za-zÀ-ÖØ-öø-ÿäüßàáâãäåæçèéêëìíîïñòóôõöøœùúûüý\s]+', ' ', line) 
                 filter_list.append(clean_line)
-                print(f'[{clean_line.strip()}]') #output is printed here 
+                # Output is printed here 
+                print(f'[{clean_line.strip()}]') 
+        
         return filter_list
 
     def run(self) -> None:
         """Main block of the code.checks the file healthcand returns executes the string_operation function"""
         error_message = self.check_file_health()
+        
         if error_message:
             log.error(error_message)
             return
 
         log.debug('opening a text file')
         last_line, lines_file = self.search_item()
+        
         with open(self.file_path, "r") as file:
             if not len(self.perform_string_operation(last_line, lines_file)): #this checks if the length of counter is 0 then its prints the error
                 log.error(f'The search_term doesnt exist in the source_text for the file {self.file_path}')
+        
         return None
 
 
