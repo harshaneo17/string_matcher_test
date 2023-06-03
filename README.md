@@ -28,21 +28,18 @@ In order to use the test case set the debug parameter in config.yaml to True and
 
 1. create a setup.py with all the requirements in the first directory.
 2. added all dependencies to requirements.txt
-3. build the package using 
+3. build and upload the package using. (Make is strict about tabs and spaces. ensure only tabs are used throughout while writing makefiles)
 
-        python setup.py sdist bdist_wheel
+        make build
 
-4. uploaded the build distribution to Pypi using
 
-        twine upload dist/*
-
-5. This is available on https://pypi.org/project/solution-harsha/ To install this use this command
+4. This is available on https://pypi.org/project/solution-harsha/ To install this use this command
 
         pip install solution-harsha
 
-6. To install this package run this command 
+   or
 
-        pip install solution_harsha
+        make install
 
 7. After installing run this command with path to the text file and get result. 
 
